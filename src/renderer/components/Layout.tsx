@@ -87,7 +87,7 @@ export function Layout({ children }: { children: ReactNode }) {
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <aside className="absolute left-0 top-0 flex h-full w-72 flex-col border-r border-slate-200 bg-white dark:border-slate-700/60 dark:bg-surface-dark-2">
+          <aside className="absolute left-0 top-0 flex h-full w-72 flex-col border-r border-slate-200 bg-white pt-[env(safe-area-inset-top)] dark:border-slate-700/60 dark:bg-surface-dark-2">
             <div className="flex h-14 items-center gap-2 px-4">
               <Dumbbell className="h-5 w-5 text-brand-500" />
               <span className="font-semibold">Coach Muscu</span>
@@ -104,13 +104,15 @@ export function Layout({ children }: { children: ReactNode }) {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        {/* Barre supérieure mobile */}
-        <header className="flex h-14 items-center gap-3 border-b border-slate-200 bg-white px-4 dark:border-slate-700/60 dark:bg-surface-dark-2 md:hidden">
-          <button onClick={() => setOpen(true)} aria-label="Menu">
-            <Menu className="h-6 w-6" />
-          </button>
-          <Dumbbell className="h-5 w-5 text-brand-500" />
-          <span className="font-semibold">Coach Muscu</span>
+        {/* Barre supérieure mobile (réserve l'espace de la barre d'état iOS) */}
+        <header className="sticky top-0 z-30 border-b border-slate-200 bg-white pt-[env(safe-area-inset-top)] dark:border-slate-700/60 dark:bg-surface-dark-2 md:hidden">
+          <div className="flex h-14 items-center gap-3 px-3">
+            <button onClick={() => setOpen(true)} aria-label="Menu" className="-ml-1 rounded-lg p-2 active:bg-slate-100 dark:active:bg-slate-700/40">
+              <Menu className="h-6 w-6" />
+            </button>
+            <Dumbbell className="h-5 w-5 text-brand-500" />
+            <span className="font-semibold">Coach Muscu</span>
+          </div>
         </header>
 
         <main className="flex-1 overflow-y-auto">
