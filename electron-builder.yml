@@ -1,0 +1,22 @@
+appId: com.anthony.coachmuscu
+productName: Coach Muscu
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**/*
+  - package.json
+asarUnpack:
+  - '**/*.node'
+mac:
+  category: public.app-category.healthcare-fitness
+  target:
+    - target: dmg
+      arch:
+        - arm64
+        - x64
+  artifactName: ${productName}-${version}-${arch}.${ext}
+  # App personnelle : pas de signature/notarisation par défaut.
+  identity: null
+dmg:
+  title: ${productName}
